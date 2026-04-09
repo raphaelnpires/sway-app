@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Sway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121217;
+            color: #e0e0e0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b6b, #ff8da6, #f2598c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #a6a6a6;
+            font-size: 16px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .faq-item {
+            background-color: #1e1e24;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a32;
+            transition: border-color 0.2s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 18px 20px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover {
+            color: #ff8da6;
+        }
+
+        .faq-question .icon {
+            font-size: 20px;
+            color: #ff6b6b;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .faq-item.open .faq-question .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 400px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 20px 18px;
+            color: #a6a6a6;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(242, 89, 140, 0.08));
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .contact-card p {
+            color: #a6a6a6;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .contact-card a.email {
+            display: inline-block;
+            color: #ff8da6;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 12px 32px;
+            border: 1px solid rgba(255, 141, 166, 0.4);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .contact-card a.email:hover {
+            background: rgba(255, 141, 166, 0.1);
+            border-color: #ff8da6;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid #2a2a32;
+        }
+
+        .links a {
+            color: #ff8da6;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 16px;
+            transition: color 0.2s ease;
+        }
+
+        .links a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #555;
+            font-size: 13px;
+        }
+
+        .footer span {
+            display: block;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sway Support</h1>
+            <p>Discover What Moves You</p>
+        </div>
+
+        <div class="section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do I create an account?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Download Sway from the App Store and tap "Get Started." You can sign up using your Apple account or email address. You must be 18 or older to use Sway. After signing up, you'll choose your interests and preferred intensity level to personalize your discovery feed.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do I become a creator?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Go to your Profile and tap "Become a Creator." You will need to complete a selfie verification to confirm your identity, agree to the Creator Agreement, and set up your payment details through Stripe. Once approved, you can start uploading content and setting subscription tiers.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do subscriptions work?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Creators set monthly subscription prices for their exclusive content. When you subscribe to a creator, you gain access to their subscriber-only videos and content. Subscriptions renew automatically each month. You can manage all your active subscriptions from your Profile settings.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do I cancel a subscription?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Go to your Profile, then tap "Subscriptions" to see all your active subscriptions. Tap the subscription you want to cancel and select "Cancel Subscription." You will continue to have access until the end of your current billing period. No refunds are issued for partial months.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do tips work?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        You can send a tip to any creator directly from their profile or from a video overlay. Tips are one-time payments that go directly to the creator (minus platform fees). Choose from preset amounts or enter a custom amount. Tips are processed securely through Stripe.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What payment methods are accepted?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Sway accepts all major credit and debit cards (Visa, Mastercard, American Express, Discover) as well as Apple Pay. All payments are processed securely through Stripe. Your payment information is never stored on our servers.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do I report a problem?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        If you encounter inappropriate content, you can report it by tapping the three-dot menu on any video or profile and selecting "Report." For technical issues, bugs, or account-related concerns, please contact us at <a href="mailto:support@swayapp.com" style="color: #ff8da6;">support@swayapp.com</a> with a description of the problem and any relevant screenshots.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do I delete my account?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Go to your Profile, tap the settings gear icon, and scroll to the bottom to find "Delete Account." You will be asked to confirm your decision. Account deletion is permanent and will remove all your data, content, and subscription history. Active subscriptions will be canceled. You can also request deletion by emailing <a href="mailto:support@swayapp.com" style="color: #ff8da6;">support@swayapp.com</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What content is allowed?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Sway is a platform for aesthetic, sensory-focused, and kink-inspired content that is always non-nude and non-explicit. Artistic expression, fashion, cosplay, and body aesthetics are encouraged. Content is organized by intensity levels (Soft, Medium, Bold) so users can discover material that matches their comfort zone. Explicit nudity, pornography, and illegal content are strictly prohibited. Please review our full Community Guidelines within the app for details.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do creators get paid?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Creators earn revenue through subscriptions, tips, and custom content requests. Payouts are processed through Stripe Connect and deposited directly into your linked bank account. You can view your earnings, pending payouts, and transaction history in the Creator Dashboard. Sway retains a platform fee on all transactions.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Contact Us</h2>
+            <div class="contact-card">
+                <p>Can't find what you're looking for? Our support team is here to help.</p>
+                <a class="email" href="mailto:support@swayapp.com">support@swayapp.com</a>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Raphael Pires Nogueira. All rights reserved.</p>
+            <span>Jersey City, New Jersey, United States</span>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            // Close all other items
+            document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+                openItem.classList.remove('open');
+            });
+
+            // Toggle the clicked item
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
