@@ -555,12 +555,300 @@
             color: #333340;
         }
 
+        /* ── ABOUT SECTION ── */
+        .about-section {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .about-title {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .about-title span {
+            background: linear-gradient(135deg, var(--coral), var(--hot-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-subtitle {
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ── BIG DIFF BLOCK ── */
+        .diff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 80px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .diff-col {
+            padding: 40px;
+            background: var(--card);
+        }
+
+        .diff-col.them { background: var(--card2); }
+
+        .diff-col-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .diff-col.us .diff-col-title { color: var(--coral); }
+
+        .diff-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            align-items: flex-start;
+        }
+
+        .diff-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .diff-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--muted);
+        }
+
+        .diff-col.us .diff-text { color: rgba(255,255,255,0.85); }
+
+        /* ── FEATURE CARDS ── */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 80px;
+        }
+
+        .feat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px 24px;
+            transition: border-color 0.2s;
+        }
+
+        .feat-card:hover { border-color: rgba(255,107,107,0.3); }
+
+        .feat-card-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .feat-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feat-card-text {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── KINK SHOWCASE ── */
+        .showcase-section {
+            position: relative;
+            z-index: 1;
+            padding: 0 24px 80px;
+        }
+
+        .showcase-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .showcase-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .showcase-subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .showcase-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: var(--card2);
+            border: 1px solid var(--border);
+        }
+
+        .showcase-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .showcase-card:hover img { transform: scale(1.04); }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 24px 20px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+        }
+
+        .showcase-tag {
+            display: inline-block;
+            background: rgba(255,107,107,0.25);
+            border: 1px solid rgba(255,107,107,0.4);
+            color: var(--coral);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 8px;
+        }
+
+        .showcase-caption {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+        }
+
+        /* ── PLACEHOLDER CARD ── */
+        .showcase-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--muted);
+        }
+
+        .showcase-placeholder-icon { font-size: 40px; opacity: 0.4; }
+        .showcase-placeholder-text { font-size: 13px; opacity: 0.5; }
+
+        /* ── PHOTO UPLOAD ── */
+        .upload-group { display: none; }
+        .upload-group.visible { display: block; }
+
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            background: var(--card2);
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: rgba(255,107,107,0.4);
+            background: rgba(255,107,107,0.04);
+        }
+
+        .upload-area input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-icon { font-size: 32px; margin-bottom: 8px; }
+
+        .upload-text {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #444455;
+        }
+
+        .upload-previews {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .upload-preview-item {
+            width: 72px;
+            height: 72px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .upload-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .diff-grid { grid-template-columns: 1fr; }
+            .feature-cards { grid-template-columns: 1fr 1fr; }
+            .showcase-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 600px) {
             .form-card { padding: 28px 20px; }
             .kink-grid { grid-template-columns: repeat(2, 1fr); }
             .features { gap: 0; }
             .feature-item { padding: 16px 16px; min-width: 120px; }
+            .feature-cards { grid-template-columns: 1fr; }
+            .showcase-grid { grid-template-columns: 1fr; }
+            .about-section { padding: 60px 16px; }
         }
 
         @media (max-width: 380px) {
@@ -630,6 +918,100 @@
         </div>
         <p class="counter-numbers"><span id="counter-num">0</span> / 100 spots claimed</p>
     </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ── ABOUT ── -->
+    <section class="about-section">
+
+        <div class="about-header">
+            <p class="section-tag">What is Sway</p>
+            <h2 class="about-title">Instagram for kink.<br><span>Elegant. Private. Yours.</span></h2>
+            <p class="about-subtitle">Sway is a curated content feed built for adults who appreciate beauty, sensuality, and self-expression — without the noise, judgment, or exposure of any other platform.</p>
+        </div>
+
+        <!-- DIFF TABLE -->
+        <div class="diff-grid">
+            <div class="diff-col them">
+                <p class="diff-col-title">Every other platform</p>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Your content gets lost in a sea of explicit material</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Anyone can screenshot and leak your content</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Generic feed — no filtering by desire or intensity</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Your real identity is exposed to everyone</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Platform takes 20-30% of everything you earn</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">No aesthetic standard — anyone posts anything</span></div>
+            </div>
+            <div class="diff-col us">
+                <p class="diff-col-title">Sway</p>
+                <div class="diff-item"><span class="diff-icon">✦</span><span class="diff-text">Curated feed — your content reaches people who specifically want what you create</span></div>
+                <div class="diff-item"><span class="diff-icon">🔒</span><span class="diff-text">Screenshot protection built into the app — technically impossible to capture</span></div>
+                <div class="diff-item"><span class="diff-icon">🎯</span><span class="diff-text">12 kink categories + intensity levels — fans find exactly what moves them</span></div>
+                <div class="diff-item"><span class="diff-icon">👁️</span><span class="diff-text">Anonymous mode by default — your real identity stays protected</span></div>
+                <div class="diff-item"><span class="diff-icon">💰</span><span class="diff-text">You keep 80% of everything — subscriptions, tips, and custom requests</span></div>
+                <div class="diff-item"><span class="diff-icon">🖤</span><span class="diff-text">Zero nudity policy — aesthetic, elegant, sensual. Quality over quantity.</span></div>
+            </div>
+        </div>
+
+        <!-- FEATURE CARDS -->
+        <div class="feature-cards">
+            <div class="feat-card">
+                <div class="feat-card-icon">🔴</div>
+                <div class="feat-card-title">The Red Room</div>
+                <div class="feat-card-text">Your exclusive paid space. Subscribers unlock your most intimate content — no nudity, just the kind of content that makes people subscribe and stay. Your price, your rules.</div>
+            </div>
+            <div class="feat-card">
+                <div class="feat-card-icon">🎯</div>
+                <div class="feat-card-title">Smart Discovery</div>
+                <div class="feat-card-text">Every viewer sets their desires on signup — tags, intensity, preferences. Your content reaches exactly the people who want it. No algorithms burying you. No noise.</div>
+            </div>
+            <div class="feat-card">
+                <div class="feat-card-icon">💌</div>
+                <div class="feat-card-title">Custom Requests</div>
+                <div class="feat-card-text">Fans can request personalized content and pay upfront. You accept or decline. Full control, no pressure. The most intimate and highest-earning revenue stream.</div>
+            </div>
+            <div class="feat-card">
+                <div class="feat-card-icon">🔒</div>
+                <div class="feat-card-title">Screenshot Protection</div>
+                <div class="feat-card-text">Technically impossible to capture. Not a warning — actual OS-level protection that renders your content black in any screenshot or screen recording. A first in the industry.</div>
+            </div>
+            <div class="feat-card">
+                <div class="feat-card-icon">👁️</div>
+                <div class="feat-card-title">Anonymous by Design</div>
+                <div class="feat-card-text">Browse, like, tip, and subscribe without revealing who you are. For creators, your identity is yours to reveal — or not. Privacy isn't a feature here. It's the foundation.</div>
+            </div>
+            <div class="feat-card">
+                <div class="feat-card-icon">✦</div>
+                <div class="feat-card-title">Elite Aesthetic Standard</div>
+                <div class="feat-card-text">No nudity. No low-effort content. Sway is built on the principle that desire is most powerful when it's implied — not shown. Think editorial fashion, not explicit content.</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ── SHOWCASE ── -->
+    <section class="showcase-section">
+        <div class="showcase-header">
+            <p class="section-tag">The Aesthetic</p>
+            <h2 class="showcase-title">What moves people on Sway</h2>
+            <p class="showcase-subtitle">Sensual. Elegant. Intentional. This is what content looks like when the platform actually has a standard.</p>
+        </div>
+
+        <div class="showcase-grid" id="showcase-grid">
+            <!-- Photos will be added here — placeholders for now -->
+            <div class="showcase-card showcase-placeholder">
+                <div class="showcase-placeholder-icon">🤫</div>
+                <div class="showcase-placeholder-text">Shh / Hush</div>
+            </div>
+            <div class="showcase-card showcase-placeholder">
+                <div class="showcase-placeholder-icon">⛓️</div>
+                <div class="showcase-placeholder-text">Dominant</div>
+            </div>
+            <div class="showcase-card showcase-placeholder">
+                <div class="showcase-placeholder-icon">👠</div>
+                <div class="showcase-placeholder-text">Heels / Feet</div>
+            </div>
+        </div>
+    </section>
 
     <div class="section-divider"></div>
 
@@ -782,6 +1164,25 @@
                     <input class="form-input" type="text" name="handle" placeholder="@yourhandle">
                 </div>
 
+                <!-- PORTFOLIO LINK — creators only -->
+                <div class="form-group upload-group" id="portfolio-group">
+                    <label>Share a portfolio link <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(optional — your best work)</span></label>
+                    <input class="form-input" type="url" name="portfolio_link" placeholder="https://onlyfans.com/yourpage or any link">
+                    <p style="font-size:12px;color:#444455;margin-top:8px;">Share a link to your existing content so we can see your style. OnlyFans, Twitter, Instagram, anywhere.</p>
+                </div>
+
+                <!-- SAMPLE PHOTOS — creators only -->
+                <div class="form-group upload-group" id="photos-group">
+                    <label>Sample photos <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(at least 1 — creators only)</span></label>
+                    <div class="upload-area" id="upload-area">
+                        <input type="file" id="photo-upload" accept="image/*" multiple>
+                        <div class="upload-icon">📎</div>
+                        <p class="upload-text">Tap to upload sample photos</p>
+                        <p class="upload-hint">Up to 3 photos • JPG, PNG • Max 5MB each • No nudity</p>
+                    </div>
+                    <div class="upload-previews" id="upload-previews"></div>
+                </div>
+
                 <button type="submit" class="submit-btn" id="submit-btn">
                     Secure My Spot 🖤
                 </button>
@@ -811,6 +1212,37 @@
             field.style.display = checkbox.checked ? 'block' : 'none';
             if (!checkbox.checked) field.value = '';
         }
+
+        // ── CREATOR FIELDS TOGGLE ──
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const isCreator = radio.value === 'Creator' && radio.checked;
+                document.querySelectorAll('.upload-group').forEach(el => {
+                    el.classList.toggle('visible', isCreator);
+                });
+            });
+        });
+
+        // ── PHOTO PREVIEW ──
+        const photoUpload = document.getElementById('photo-upload');
+        const previews = document.getElementById('upload-previews');
+        let uploadedFiles = [];
+
+        photoUpload && photoUpload.addEventListener('change', (e) => {
+            const files = [...e.target.files].slice(0, 3);
+            uploadedFiles = files;
+            previews.innerHTML = '';
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const div = document.createElement('div');
+                    div.className = 'upload-preview-item';
+                    div.innerHTML = `<img src="${ev.target.result}" alt="preview">`;
+                    previews.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
 
         // ── COUNTER ANIMATION ──
         // Change this number to your real current signup count
@@ -864,6 +1296,10 @@
             data.append('kinks', kinks || 'None selected');
             data.append('platforms', platforms || 'None selected');
             data.append('handle', formData.get('handle') || 'Not provided');
+            data.append('portfolio_link', formData.get('portfolio_link') || 'Not provided');
+            if (uploadedFiles.length > 0) {
+                data.append('sample_photos', `${uploadedFiles.length} photo(s) uploaded: ${uploadedFiles.map(f => f.name).join(', ')}`);
+            }
 
             try {
                 const res = await fetch('https://api.web3forms.com/submit', {
