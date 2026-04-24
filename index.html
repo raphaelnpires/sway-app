@@ -1084,9 +1084,9 @@
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/shh-dominant.png" alt="Dominant" loading="lazy">
+                <img src="kinks/shh-dominant.png" alt="Shh / Hush" loading="lazy">
                 <div class="showcase-overlay">
-                    <span class="showcase-tag">⛓️ Dominant</span>
+                    <span class="showcase-tag">🤫 Shh / Hush</span>
                 </div>
             </div>
         </div>
@@ -1286,14 +1286,8 @@
 
                 <!-- SAMPLE PHOTOS — creators only -->
                 <div class="form-group upload-group" id="photos-group">
-                    <label>Sample photos <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(at least 1 — creators only)</span></label>
-                    <div class="upload-area" id="upload-area">
-                        <input type="file" id="photo-upload" accept="image/*" multiple>
-                        <div class="upload-icon">📎</div>
-                        <p class="upload-text">Tap to upload sample photos</p>
-                        <p class="upload-hint">Up to 3 photos • JPG, PNG • Max 5MB each • No nudity</p>
-                    </div>
-                    <div class="upload-previews" id="upload-previews"></div>
+                    <label>Share your work <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(creators only — use the portfolio link above)</span></label>
+                    <p style="font-size:13px;color:#555566;line-height:1.6;margin-top:4px;">Paste a link to your existing content in the portfolio field above — OnlyFans, Instagram, Twitter, anywhere. That's the easiest way for us to see your style.</p>
                 </div>
 
                 <button type="submit" class="submit-btn" id="submit-btn">
@@ -1358,17 +1352,22 @@
         });
 
         // ── COUNTER ANIMATION ──
-        // Change this number to your real current signup count
+        // Update this number manually when you get real signups
         const CURRENT_SIGNUPS = 0;
         const GOAL = 100;
 
         window.addEventListener('load', () => {
+            const bar = document.getElementById('counter-bar');
+            // Hide counter until there are real signups to show
+            if (CURRENT_SIGNUPS === 0) {
+                if (bar) bar.style.display = 'none';
+                return;
+            }
             setTimeout(() => {
                 const fill = document.getElementById('counter-fill');
                 const num = document.getElementById('counter-num');
                 const pct = Math.min((CURRENT_SIGNUPS / GOAL) * 100, 100);
                 fill.style.width = pct + '%';
-
                 let count = 0;
                 const interval = setInterval(() => {
                     count++;
@@ -1422,10 +1421,10 @@
             data.append('platforms', platforms || 'None selected');
             data.append('handle', formData.get('handle') || 'Not provided');
             data.append('portfolio_link', formData.get('portfolio_link') || 'Not provided');
-            // Attach actual photo files so they arrive in the email
-            uploadedFiles.forEach((file, i) => {
-                data.append(`photo_${i + 1}`, file, file.name);
-            });
+            // Note uploaded filenames as text (file attachments not supported on free plan)
+            if (uploadedFiles.length > 0) {
+                data.append('sample_photos', uploadedFiles.map(f => f.name).join(', '));
+            }
 
             // Basic email format check before sending
             const emailVal = formData.get('email');
