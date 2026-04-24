@@ -730,9 +730,23 @@
                         <input class="platform-option" type="checkbox" name="platforms" id="p-pa" value="Patreon">
                         <label class="platform-label" for="p-pa"><span class="plat-icon">🎨</span> Patreon</label>
 
-                        <input class="platform-option" type="checkbox" name="platforms" id="p-ot" value="Other">
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-lf" value="LoyalFans">
+                        <label class="platform-label" for="p-lf"><span class="plat-icon">💜</span> LoyalFans</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-fn" value="Fansly">
+                        <label class="platform-label" for="p-fn"><span class="plat-icon">⭐</span> Fansly</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-mv" value="ManyVids">
+                        <label class="platform-label" for="p-mv"><span class="plat-icon">🎬</span> ManyVids</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-4n" value="4based">
+                        <label class="platform-label" for="p-4n"><span class="plat-icon">🔗</span> 4based</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-ot" value="Other" onchange="toggleOtherPlatform(this)">
                         <label class="platform-label" for="p-ot"><span class="plat-icon">✦</span> Other</label>
                     </div>
+
+                    <input class="form-input" type="text" name="platforms_other" id="platforms-other" placeholder="Which platform?" style="display:none; margin-top:8px;">
                 </div>
 
                 <!-- HANDLE -->
@@ -764,6 +778,13 @@
     </footer>
 
     <script>
+        // ── OTHER PLATFORM TOGGLE ──
+        function toggleOtherPlatform(checkbox) {
+            const field = document.getElementById('platforms-other');
+            field.style.display = checkbox.checked ? 'block' : 'none';
+            if (!checkbox.checked) field.value = '';
+        }
+
         // ── COUNTER ANIMATION ──
         // Change this number to your real current signup count
         const CURRENT_SIGNUPS = 0;
