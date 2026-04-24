@@ -3,82 +3,840 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sway - Discover What Moves You</title>
+    <title>Sway — Discover What Moves You</title>
+    <meta name="description" content="Where your hidden fantasies meet the creators who bring them to life. Join the waitlist.">
+    <meta property="og:title" content="Sway — Discover What Moves You">
+    <meta property="og:description" content="Where your hidden fantasies meet the creators who bring them to life.">
+    <meta property="og:image" content="https://swaytheapp.net/SwayLogo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --coral: #FF6B6B;
+            --pink: #FF8CA5;
+            --hot-pink: #F25A8D;
+            --bg: #0e0e10;
+            --card: #18181c;
+            --card2: #1f1f26;
+            --text: #ffffff;
+            --muted: #888899;
+            --border: rgba(255,255,255,0.07);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
-            color: #e0e0e0;
+            font-family: 'Outfit', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── GLOW ORBS ── */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: rgba(255,107,107,0.12);
+            top: -200px; left: -200px;
+        }
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: rgba(242,90,141,0.10);
+            bottom: 0; right: -150px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            z-index: 1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-        .container {
-            max-width: 600px;
-            padding: 40px 24px;
+            padding: 80px 24px 60px;
             text-align: center;
         }
-        .logo-img {
-            max-width: 280px;
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(255,107,107,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 100%, rgba(242,90,141,0.07) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+        .logo {
+            width: 220px;
             height: auto;
-            margin-bottom: 8px;
+            margin-bottom: 28px;
+            filter: drop-shadow(0 0 40px rgba(255,107,107,0.35));
         }
-        .tagline {
-            font-size: 18px;
-            color: #a0a0b0;
-            margin-bottom: 48px;
+
+        .headline {
+            font-size: clamp(38px, 7vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.75) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .badge {
+
+        .subheadline {
+            font-size: clamp(16px, 3vw, 20px);
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 520px;
+            margin: 0 auto 48px;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,107,107,0.12);
+            border: 1px solid rgba(255,107,107,0.25);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--coral);
+            margin-bottom: 56px;
+            letter-spacing: 0.5px;
+        }
+        .pill-badge .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--coral);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .cta-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            background: linear-gradient(135deg, var(--coral), var(--hot-pink));
             color: white;
-            padding: 12px 32px;
-            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 48px;
+            padding: 16px 40px;
+            border-radius: 100px;
             text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 32px rgba(255,107,107,0.3);
         }
-        .links {
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255,107,107,0.45);
+        }
+
+        /* ── FEATURES STRIP ── */
+        .features {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .feature-item {
             display: flex;
             flex-direction: column;
-            gap: 16px;
             align-items: center;
+            gap: 8px;
+            padding: 24px 32px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
         }
-        .links a {
-            color: #ff6b6b;
-            text-decoration: none;
-            font-size: 16px;
-            transition: opacity 0.2s;
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 4px;
         }
-        .links a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-        .footer {
-            margin-top: 64px;
+
+        .feature-title {
             font-size: 13px;
-            color: #666;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.3px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--border), transparent);
+            margin: 48px auto;
+        }
+
+        /* ── FORM SECTION ── */
+        .form-section {
+            position: relative;
+            z-index: 1;
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        .form-label-top {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 12px;
+        }
+
+        .form-title {
+            font-size: clamp(26px, 5vw, 36px);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            font-size: 15px;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        /* ── FORM CARD ── */
+        .form-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: rgba(255,107,107,0.5);
+            box-shadow: 0 0 0 3px rgba(255,107,107,0.08);
+        }
+
+        .form-input::placeholder { color: #444455; }
+
+        /* ── TOGGLE: Creator / Viewer ── */
+        .role-toggle {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .role-option { display: none; }
+
+        .role-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 16px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card2);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .role-label .role-icon { font-size: 24px; }
+        .role-label .role-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+        .role-label .role-desc {
+            font-size: 11px;
+            color: #444455;
+        }
+
+        .role-option:checked + .role-label {
+            border-color: var(--coral);
+            background: rgba(255,107,107,0.08);
+            box-shadow: 0 0 0 1px rgba(255,107,107,0.2);
+        }
+
+        .role-option:checked + .role-label .role-name { color: var(--coral); }
+
+        /* ── KINK CHECKBOXES ── */
+        .kink-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .kink-option { display: none; }
+
+        .kink-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 8px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card2);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            transition: all 0.15s;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .kink-label:hover { border-color: rgba(255,107,107,0.3); }
+
+        .kink-option:checked + .kink-label {
+            border-color: var(--coral);
+            background: rgba(255,107,107,0.1);
+            color: var(--text);
+        }
+
+        /* ── PLATFORM CHECKBOXES ── */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .platform-option { display: none; }
+
+        .platform-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card2);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            transition: all 0.15s;
+        }
+
+        .platform-label:hover { border-color: rgba(255,107,107,0.3); }
+
+        .platform-option:checked + .platform-label {
+            border-color: var(--coral);
+            background: rgba(255,107,107,0.1);
+            color: var(--text);
+        }
+
+        .platform-label .plat-icon { font-size: 18px; flex-shrink: 0; }
+
+        /* ── SUBMIT BTN ── */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--coral), var(--hot-pink));
+            border: none;
+            border-radius: 14px;
+            padding: 18px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 32px rgba(255,107,107,0.3);
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255,107,107,0.45);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-fine-print {
+            text-align: center;
+            font-size: 12px;
+            color: #444455;
+            margin-top: 16px;
+            line-height: 1.5;
+        }
+
+        /* ── SUCCESS STATE ── */
+        .success-card {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .success-tag {
+            display: inline-block;
+            background: rgba(255,107,107,0.12);
+            border: 1px solid rgba(255,107,107,0.25);
+            border-radius: 100px;
+            padding: 6px 18px;
+            font-size: 13px;
+            color: var(--coral);
+            margin-top: 24px;
+        }
+
+        /* ── COUNTER ── */
+        .counter-bar {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 32px 24px;
+            max-width: 400px;
+            margin: 0 auto 0;
+        }
+
+        .counter-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .counter-track {
+            height: 4px;
+            background: var(--card2);
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .counter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--coral), var(--hot-pink));
+            border-radius: 100px;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .counter-numbers {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .counter-numbers span { color: var(--coral); font-weight: 600; }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--coral); }
+
+        .footer-copy {
+            font-size: 12px;
+            color: #333340;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .form-card { padding: 28px 20px; }
+            .kink-grid { grid-template-columns: repeat(2, 1fr); }
+            .features { gap: 0; }
+            .feature-item { padding: 16px 16px; min-width: 120px; }
+        }
+
+        @media (max-width: 380px) {
+            .platform-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="SwayLogo.png" alt="Sway" class="logo-img">
-        <p class="tagline">Discover what moves you</p>
 
-        <span class="badge">Coming Soon to the App Store</span>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-        <nav class="links">
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+
+            <img src="SwayLogo.png" alt="Sway" class="logo">
+
+            <div class="pill-badge">
+                <span class="dot"></span>
+                Launching Soon — Limited Spots
+            </div>
+
+            <h1 class="headline">Discover what<br>moves you.</h1>
+
+            <p class="subheadline">
+                Where your hidden fantasies meet the creators who bring them to life. Aesthetic, intimate, private.
+            </p>
+
+            <a href="#join" class="cta-btn">Join the Waitlist 🖤</a>
+        </div>
+    </section>
+
+    <!-- ── FEATURES ── -->
+    <div class="features">
+        <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">Screenshot Protected</div>
+            <div class="feature-desc">Content can't be captured — ever</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">Curated by Desire</div>
+            <div class="feature-desc">Feed shaped by what moves you</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">👁️</div>
+            <div class="feature-title">Anonymous by Default</div>
+            <div class="feature-desc">Private by design, always</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">💰</div>
+            <div class="feature-title">80% to Creators</div>
+            <div class="feature-desc">The best split in the industry</div>
+        </div>
+    </div>
+
+    <!-- ── COUNTER ── -->
+    <div class="counter-bar" id="counter-bar">
+        <p class="counter-label">Founding creators & members</p>
+        <div class="counter-track">
+            <div class="counter-fill" id="counter-fill"></div>
+        </div>
+        <p class="counter-numbers"><span id="counter-num">0</span> / 100 spots claimed</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ── FORM ── -->
+    <section class="form-section" id="join">
+
+        <div class="form-label-top">
+            <p class="section-tag">Early Access</p>
+            <h2 class="form-title">Secure your spot</h2>
+            <p class="form-subtitle">First 100 members get founding benefits — lower fees, exclusive badge, priority access.</p>
+        </div>
+
+        <div class="form-card">
+
+            <!-- SUCCESS STATE -->
+            <div class="success-card" id="success-card">
+                <div class="success-icon">🖤</div>
+                <h3 class="success-title">You're on the list.</h3>
+                <p class="success-text">We'll reach out as soon as Sway is ready. You're joining something rare — thank you for being early.</p>
+                <span class="success-tag">Founding member status secured</span>
+            </div>
+
+            <!-- FORM -->
+            <form id="waitlist-form" action="https://api.web3forms.com/submit" method="POST">
+
+                <!-- Web3Forms access key - replace with your key from web3forms.com -->
+                <input type="hidden" name="access_key" value="c1ed8fe4-d279-4a5d-81b4-6344564b24d1">
+                <input type="hidden" name="subject" value="New Sway Waitlist Signup">
+                <input type="hidden" name="redirect" value="false">
+                <input type="checkbox" name="botcheck" style="display:none">
+
+                <!-- NAME -->
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input class="form-input" type="text" name="name" placeholder="What should we call you?" required>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-input" type="email" name="email" placeholder="your@email.com" required>
+                </div>
+
+                <!-- ROLE -->
+                <div class="form-group">
+                    <label>I am joining as a</label>
+                    <div class="role-toggle">
+                        <input class="role-option" type="radio" name="role" id="role-creator" value="Creator">
+                        <label class="role-label" for="role-creator">
+                            <span class="role-icon">✦</span>
+                            <span class="role-name">Creator</span>
+                            <span class="role-desc">I create & sell content</span>
+                        </label>
+
+                        <input class="role-option" type="radio" name="role" id="role-viewer" value="Viewer">
+                        <label class="role-label" for="role-viewer">
+                            <span class="role-icon">👁️</span>
+                            <span class="role-name">Viewer</span>
+                            <span class="role-desc">I discover & subscribe</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- KINKS -->
+                <div class="form-group">
+                    <label>What moves you <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(select all that apply)</span></label>
+                    <div class="kink-grid">
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-hands" value="Hands">
+                        <label class="kink-label" for="k-hands">🤲 Hands</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-feet" value="Feet">
+                        <label class="kink-label" for="k-feet">🦶 Feet</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-nails" value="Nails">
+                        <label class="kink-label" for="k-nails">💅 Nails</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-heels" value="Heels">
+                        <label class="kink-label" for="k-heels">👠 Heels</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-stockings" value="Stockings">
+                        <label class="kink-label" for="k-stockings">🪡 Stockings</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-gloves" value="Gloves">
+                        <label class="kink-label" for="k-gloves">🧤 Gloves</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-dominant" value="Dominant">
+                        <label class="kink-label" for="k-dominant">⛓️ Dominant</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-teasing" value="Teasing">
+                        <label class="kink-label" for="k-teasing">😈 Teasing</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-worship" value="Worship">
+                        <label class="kink-label" for="k-worship">🙏 Worship</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-hush" value="Hush">
+                        <label class="kink-label" for="k-hush">🫢 Hush</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-shh" value="Shh">
+                        <label class="kink-label" for="k-shh">🤫 Shh</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-whisper" value="Whisper">
+                        <label class="kink-label" for="k-whisper">🎙️ Whisper</label>
+                    </div>
+                </div>
+
+                <!-- PLATFORMS -->
+                <div class="form-group">
+                    <label>Platforms I currently use <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(optional)</span></label>
+                    <div class="platform-grid">
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-of" value="OnlyFans">
+                        <label class="platform-label" for="p-of"><span class="plat-icon">🔞</span> OnlyFans</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-ig" value="Instagram">
+                        <label class="platform-label" for="p-ig"><span class="plat-icon">📸</span> Instagram</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-tw" value="Twitter/X">
+                        <label class="platform-label" for="p-tw"><span class="plat-icon">🐦</span> Twitter / X</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-fl" value="FetLife">
+                        <label class="platform-label" for="p-fl"><span class="plat-icon">⛓️</span> FetLife</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-pa" value="Patreon">
+                        <label class="platform-label" for="p-pa"><span class="plat-icon">🎨</span> Patreon</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-ot" value="Other">
+                        <label class="platform-label" for="p-ot"><span class="plat-icon">✦</span> Other</label>
+                    </div>
+                </div>
+
+                <!-- HANDLE -->
+                <div class="form-group">
+                    <label>Your Handle <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#555566">(optional — any platform)</span></label>
+                    <input class="form-input" type="text" name="handle" placeholder="@yourhandle">
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    Secure My Spot 🖤
+                </button>
+
+                <p class="form-fine-print">
+                    18+ only. We'll never share your info. No spam — just your launch invite.
+                </p>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-links">
             <a href="privacy-policy.html">Privacy Policy</a>
             <a href="terms-of-service.html">Terms of Service</a>
-            <a href="support.html">Support & FAQ</a>
-        </nav>
+            <a href="support.html">Support</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Sway. All rights reserved. 18+ only.</p>
+    </footer>
 
-        <p class="footer">&copy; 2026 Sway. All rights reserved.</p>
-    </div>
+    <script>
+        // ── COUNTER ANIMATION ──
+        // Change this number to your real current signup count
+        const CURRENT_SIGNUPS = 0;
+        const GOAL = 100;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const fill = document.getElementById('counter-fill');
+                const num = document.getElementById('counter-num');
+                const pct = Math.min((CURRENT_SIGNUPS / GOAL) * 100, 100);
+                fill.style.width = pct + '%';
+
+                let count = 0;
+                const interval = setInterval(() => {
+                    count++;
+                    num.textContent = count;
+                    if (count >= CURRENT_SIGNUPS) clearInterval(interval);
+                }, 30);
+            }, 400);
+        });
+
+        // ── FORM SUBMIT ──
+        const form = document.getElementById('waitlist-form');
+        const successCard = document.getElementById('success-card');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Securing your spot...';
+
+            const formData = new FormData(form);
+
+            // Collect all checked kinks
+            const kinks = [...form.querySelectorAll('input[name="kinks"]:checked')]
+                .map(el => el.value).join(', ');
+
+            // Collect all checked platforms
+            const platforms = [...form.querySelectorAll('input[name="platforms"]:checked')]
+                .map(el => el.value).join(', ');
+
+            // Build clean submission
+            const data = new FormData();
+            data.append('access_key', form.querySelector('[name="access_key"]').value);
+            data.append('subject', form.querySelector('[name="subject"]').value);
+            data.append('redirect', 'false');
+            data.append('name', formData.get('name'));
+            data.append('email', formData.get('email'));
+            data.append('role', formData.get('role') || 'Not specified');
+            data.append('kinks', kinks || 'None selected');
+            data.append('platforms', platforms || 'None selected');
+            data.append('handle', formData.get('handle') || 'Not provided');
+
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: data
+                });
+                const json = await res.json();
+
+                if (json.success) {
+                    form.style.display = 'none';
+                    successCard.style.display = 'block';
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Secure My Spot 🖤';
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    </script>
+
 </body>
 </html>
