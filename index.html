@@ -1352,30 +1352,46 @@
         });
 
         // ── COUNTER ANIMATION ──
-        // Update this number manually when you get real signups
-        const CURRENT_SIGNUPS = 0;
+        // ── LIVE COUNTER ──
         const GOAL = 100;
+        const COUNTER_URL = 'https://api.counterapi.dev/v1/swaytheapp/signups';
 
-        window.addEventListener('load', () => {
+        function animateCounter(value) {
             const bar = document.getElementById('counter-bar');
-            // Hide counter until there are real signups to show
-            if (CURRENT_SIGNUPS === 0) {
-                if (bar) bar.style.display = 'none';
-                return;
+            const fill = document.getElementById('counter-fill');
+            const num = document.getElementById('counter-num');
+            if (!bar) return;
+            if (value <= 0) { bar.style.display = 'none'; return; }
+            bar.style.display = '';
+            const pct = Math.min((value / GOAL) * 100, 100);
+            fill.style.width = pct + '%';
+            let count = 0;
+            const interval = setInterval(() => {
+                count++;
+                num.textContent = count;
+                if (count >= value) clearInterval(interval);
+            }, 40);
+        }
+
+        async function fetchCount() {
+            try {
+                const res = await fetch(COUNTER_URL + '/get');
+                const json = await res.json();
+                animateCounter(json.count || 0);
+            } catch {
+                document.getElementById('counter-bar').style.display = 'none';
             }
-            setTimeout(() => {
-                const fill = document.getElementById('counter-fill');
-                const num = document.getElementById('counter-num');
-                const pct = Math.min((CURRENT_SIGNUPS / GOAL) * 100, 100);
-                fill.style.width = pct + '%';
-                let count = 0;
-                const interval = setInterval(() => {
-                    count++;
-                    num.textContent = count;
-                    if (count >= CURRENT_SIGNUPS) clearInterval(interval);
-                }, 30);
-            }, 400);
-        });
+        }
+
+        async function incrementCount() {
+            try {
+                const res = await fetch(COUNTER_URL + '/up');
+                const json = await res.json();
+                animateCounter(json.count || 0);
+            } catch { /* silently fail */ }
+        }
+
+        window.addEventListener('load', fetchCount);
 
         // ── FORM ERROR HELPER ──
         function showFormError(msg) {
@@ -1446,6 +1462,7 @@
                 if (json.success) {
                     form.style.display = 'none';
                     successCard.style.display = 'block';
+                    incrementCount();
                 } else {
                     const msg = json.message || '';
                     if (msg.toLowerCase().includes('email') || msg.toLowerCase().includes('invalid')) {
