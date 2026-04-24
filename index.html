@@ -59,19 +59,28 @@
         /* ── NAV ── */
         .nav {
             position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            padding: 20px 36px;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 36px;
             display: flex;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(14,14,16,0.95), transparent);
-            backdrop-filter: blur(8px);
+            justify-content: flex-start;
+            background: linear-gradient(to bottom, rgba(14,14,16,0.98) 0%, transparent 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .nav-logo {
-            height: 44px;
+            display: block;
+            height: 64px;
             width: auto;
-            filter: drop-shadow(0 0 16px rgba(255,107,107,0.3));
+            max-width: 200px;
+            object-fit: contain;
+            object-position: left center;
+            filter: drop-shadow(0 0 20px rgba(255,107,107,0.4));
+            flex-shrink: 0;
         }
 
         /* ── HERO ── */
@@ -755,6 +764,9 @@
 
                         <input class="platform-option" type="checkbox" name="platforms" id="p-4n" value="4based">
                         <label class="platform-label" for="p-4n"><span class="plat-icon">🔗</span> 4based</label>
+
+                        <input class="platform-option" type="checkbox" name="platforms" id="p-c4s" value="Clips4Sale">
+                        <label class="platform-label" for="p-c4s"><span class="plat-icon">🎥</span> Clips4Sale</label>
 
                         <input class="platform-option" type="checkbox" name="platforms" id="p-ot" value="Other" onchange="toggleOtherPlatform(this)">
                         <label class="platform-label" for="p-ot"><span class="plat-icon">✦</span> Other</label>
