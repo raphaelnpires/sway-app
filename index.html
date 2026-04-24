@@ -1351,17 +1351,16 @@
         // ── COUNTER ANIMATION ──
         // ── LIVE COUNTER ──
         const GOAL = 100;
-        const COUNTER_URL = 'https://api.counterapi.dev/v1/swaytheapp/signups';
 
-        function animateCounter(value) {
+        function setCounter(value) {
             const bar = document.getElementById('counter-bar');
             const fill = document.getElementById('counter-fill');
             const num = document.getElementById('counter-num');
             if (!bar) return;
-            if (value <= 0) { bar.style.display = 'none'; return; }
             bar.style.display = '';
             const pct = Math.min((value / GOAL) * 100, 100);
             fill.style.width = pct + '%';
+            if (value === 0) { num.textContent = 0; return; }
             let count = 0;
             const interval = setInterval(() => {
                 count++;
@@ -1372,20 +1371,22 @@
 
         async function fetchCount() {
             try {
-                const res = await fetch(COUNTER_URL + '/get');
+                const res = await fetch('https://api.counterapi.dev/v1/swaytheapp/signups');
+                if (!res.ok) throw new Error();
                 const json = await res.json();
-                animateCounter(json.count || 0);
+                setCounter(json.count || 0);
             } catch {
-                document.getElementById('counter-bar').style.display = 'none';
+                setCounter(0);
             }
         }
 
         async function incrementCount() {
             try {
-                const res = await fetch(COUNTER_URL + '/up');
+                const res = await fetch('https://api.counterapi.dev/v1/swaytheapp/signups/up');
+                if (!res.ok) throw new Error();
                 const json = await res.json();
-                animateCounter(json.count || 0);
-            } catch { /* silently fail */ }
+                setCounter(json.count || 0);
+            } catch { /* silently fail, counter stays as is */ }
         }
 
         window.addEventListener('load', fetchCount);
