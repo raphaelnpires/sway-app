@@ -75,9 +75,9 @@
 
         .nav-logo {
             display: block;
-            height: 90px;
+            height: 120px;
             width: auto;
-            max-width: 260px;
+            max-width: 320px;
             object-fit: contain;
             object-position: left center;
             filter: drop-shadow(0 0 24px rgba(255,107,107,0.45));
@@ -705,9 +705,9 @@
 
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -787,7 +787,7 @@
         .app-screens {
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: stretch;
             gap: 24px;
             flex-wrap: wrap;
         }
@@ -806,7 +806,7 @@
         }
 
         .app-screen.center { width: 220px; }
-        .app-screen.side { width: 190px; opacity: 0.75; }
+        .app-screen.side { width: 220px; opacity: 1; }
 
         .app-screen img {
             width: 100%;
@@ -900,6 +900,7 @@
             .diff-grid { grid-template-columns: 1fr; }
             .feature-cards { grid-template-columns: 1fr 1fr; }
             .showcase-grid { grid-template-columns: 1fr 1fr; }
+            .app-screen.side { width: 180px; }
         }
 
         @media (max-width: 600px) {
@@ -1059,21 +1060,27 @@
 
         <div class="showcase-grid" id="showcase-grid">
             <div class="showcase-card">
-                <img src="kinks/shh-dominant.png" alt="Shh" loading="lazy">
+                <img src="kinks/shh-hush.png" alt="Shh / Hush" loading="lazy">
                 <div class="showcase-overlay">
-                    <span class="showcase-tag">🤫 Shh</span>
+                    <span class="showcase-tag">🤫 Shh / Hush</span>
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/feet-bedroom.png" alt="Feet" loading="lazy">
+                <img src="kinks/nails.png" alt="Nails" loading="lazy">
+                <div class="showcase-overlay">
+                    <span class="showcase-tag">💅 Nails</span>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <img src="kinks/feet.png" alt="Feet" loading="lazy">
                 <div class="showcase-overlay">
                     <span class="showcase-tag">🦶 Feet</span>
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/stockings.png" alt="Stockings" loading="lazy">
+                <img src="kinks/worship.png" alt="Worship" loading="lazy">
                 <div class="showcase-overlay">
-                    <span class="showcase-tag">🖤 Stockings</span>
+                    <span class="showcase-tag">🙏 Worship</span>
                 </div>
             </div>
         </div>
