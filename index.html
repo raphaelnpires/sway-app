@@ -75,12 +75,12 @@
 
         .nav-logo {
             display: block;
-            height: 64px;
+            height: 90px;
             width: auto;
-            max-width: 200px;
+            max-width: 260px;
             object-fit: contain;
             object-position: left center;
-            filter: drop-shadow(0 0 20px rgba(255,107,107,0.4));
+            filter: drop-shadow(0 0 24px rgba(255,107,107,0.45));
             flex-shrink: 0;
         }
 
@@ -770,6 +770,67 @@
         .showcase-placeholder-icon { font-size: 40px; opacity: 0.4; }
         .showcase-placeholder-text { font-size: 13px; opacity: 0.5; }
 
+        /* ── APP PREVIEW ── */
+        .app-preview-section {
+            position: relative;
+            z-index: 1;
+            padding: 80px 24px;
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .app-preview-section .showcase-header {
+            margin-bottom: 56px;
+        }
+
+        .app-screens {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .app-screen {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .app-screen:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 48px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,107,107,0.2);
+        }
+
+        .app-screen.center { width: 220px; }
+        .app-screen.side { width: 190px; opacity: 0.75; }
+
+        .app-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .app-screen-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 20px 14px 14px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            .app-screen.side { display: none; }
+            .app-screen.center { width: 240px; }
+        }
+
         /* ── PHOTO UPLOAD ── */
         .upload-group { display: none; }
         .upload-group.visible { display: block; }
@@ -873,13 +934,13 @@
 
             <div class="pill-badge">
                 <span class="dot"></span>
-                Launching Soon — Limited Spots
+                Launching Soon. Limited Spots.
             </div>
 
             <h1 class="headline">Discover what<br>moves you.</h1>
 
             <p class="subheadline">
-                Where your hidden fantasies meet the creators who bring them to life. Aesthetic, intimate, private.
+                The people who make what moves you are already out there. Sway is where you actually find each other.
             </p>
 
             <a href="#join" class="cta-btn">Join the Waitlist 🖤</a>
@@ -891,22 +952,22 @@
         <div class="feature-item">
             <div class="feature-icon">🔒</div>
             <div class="feature-title">Screenshot Protected</div>
-            <div class="feature-desc">Content can't be captured — ever</div>
+            <div class="feature-desc">What you post stays yours</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">🎯</div>
             <div class="feature-title">Curated by Desire</div>
-            <div class="feature-desc">Feed shaped by what moves you</div>
+            <div class="feature-desc">Built around what actually moves you</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">👁️</div>
             <div class="feature-title">Anonymous by Default</div>
-            <div class="feature-desc">Private by design, always</div>
+            <div class="feature-desc">Anonymous unless you say otherwise</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">💰</div>
             <div class="feature-title">80% to Creators</div>
-            <div class="feature-desc">The best split in the industry</div>
+            <div class="feature-desc">80% to you, full stop</div>
         </div>
     </div>
 
@@ -926,29 +987,29 @@
 
         <div class="about-header">
             <p class="section-tag">What is Sway</p>
-            <h2 class="about-title">Instagram for kink.<br><span>Elegant. Private. Yours.</span></h2>
-            <p class="about-subtitle">Sway is a curated content feed built for adults who appreciate beauty, sensuality, and self-expression — without the noise, judgment, or exposure of any other platform.</p>
+            <h2 class="about-title">Think Instagram,<br><span>but built for kink.</span></h2>
+            <p class="about-subtitle">A photo and video feed, just like the one you already know, but built from the ground up for adults who want content filtered by desire, not just age. You scroll, you discover, you subscribe. And if you want, nobody ever knows it was you — anonymous mode is on by default.</p>
         </div>
 
         <!-- DIFF TABLE -->
         <div class="diff-grid">
             <div class="diff-col them">
                 <p class="diff-col-title">Every other platform</p>
-                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Your content gets lost in a sea of explicit material</span></div>
-                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Anyone can screenshot and leak your content</span></div>
-                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Generic feed — no filtering by desire or intensity</span></div>
-                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Your real identity is exposed to everyone</span></div>
-                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Platform takes 20-30% of everything you earn</span></div>
-                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">No aesthetic standard — anyone posts anything</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Your content drowns in explicit material and never reaches the right audience</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Someone takes a screenshot. Someone leaks it. You find out later.</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">The feed is the same for everyone, no way to filter for what you actually want</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">Your real name and face are visible to anyone who looks</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">They take 20 to 30% every time you earn something</span></div>
+                <div class="diff-item"><span class="diff-icon">❌</span><span class="diff-text">No curation, no standard. Anyone posts anything.</span></div>
             </div>
             <div class="diff-col us">
                 <p class="diff-col-title">Sway</p>
-                <div class="diff-item"><span class="diff-icon">✦</span><span class="diff-text">Curated feed — your content reaches people who specifically want what you create</span></div>
-                <div class="diff-item"><span class="diff-icon">🔒</span><span class="diff-text">Screenshot protection built into the app — technically impossible to capture</span></div>
-                <div class="diff-item"><span class="diff-icon">🎯</span><span class="diff-text">12 kink categories + intensity levels — fans find exactly what moves them</span></div>
-                <div class="diff-item"><span class="diff-icon">👁️</span><span class="diff-text">Anonymous mode by default — your real identity stays protected</span></div>
-                <div class="diff-item"><span class="diff-icon">💰</span><span class="diff-text">You keep 80% of everything — subscriptions, tips, and custom requests</span></div>
-                <div class="diff-item"><span class="diff-icon">🖤</span><span class="diff-text">Zero nudity policy — aesthetic, elegant, sensual. Quality over quantity.</span></div>
+                <div class="diff-item"><span class="diff-icon">✦</span><span class="diff-text">Your content gets in front of people specifically looking for what you make</span></div>
+                <div class="diff-item"><span class="diff-icon">🔒</span><span class="diff-text">Screenshots come out black. Not a warning, an actual technical block that works.</span></div>
+                <div class="diff-item"><span class="diff-icon">🎯</span><span class="diff-text">12 kink categories with intensity levels, so fans arrive already knowing what they want</span></div>
+                <div class="diff-item"><span class="diff-icon">👁️</span><span class="diff-text">You stay anonymous by default. Your real identity is yours.</span></div>
+                <div class="diff-item"><span class="diff-icon">💰</span><span class="diff-text">You keep 80% of everything. Subscriptions, tips, custom requests, all of it.</span></div>
+                <div class="diff-item"><span class="diff-icon">🖤</span><span class="diff-text">No nudity, no lazy posts. Desire hits differently when it isn't fully shown.</span></div>
             </div>
         </div>
 
@@ -957,32 +1018,32 @@
             <div class="feat-card">
                 <div class="feat-card-icon">🔴</div>
                 <div class="feat-card-title">The Red Room</div>
-                <div class="feat-card-text">Your exclusive paid space. Subscribers unlock your most intimate content — no nudity, just the kind of content that makes people subscribe and stay. Your price, your rules.</div>
+                <div class="feat-card-text">Your paid space. Subscribers unlock your most intimate content, no nudity required, just the kind of thing that keeps people subscribed month after month. You set the price whenever you want to change it.</div>
             </div>
             <div class="feat-card">
                 <div class="feat-card-icon">🎯</div>
                 <div class="feat-card-title">Smart Discovery</div>
-                <div class="feat-card-text">Every viewer sets their desires on signup — tags, intensity, preferences. Your content reaches exactly the people who want it. No algorithms burying you. No noise.</div>
+                <div class="feat-card-text">Every viewer tells Sway what they want before they even open the feed. Tags, intensity, preferences. So when you post, it reaches people who were already looking for you.</div>
             </div>
             <div class="feat-card">
                 <div class="feat-card-icon">💌</div>
                 <div class="feat-card-title">Custom Requests</div>
-                <div class="feat-card-text">Fans can request personalized content and pay upfront. You accept or decline. Full control, no pressure. The most intimate and highest-earning revenue stream.</div>
+                <div class="feat-card-text">Fans pay upfront for something made just for them. You read the request, say yes or no, deliver on your timeline. Nothing more complicated than that.</div>
             </div>
             <div class="feat-card">
                 <div class="feat-card-icon">🔒</div>
                 <div class="feat-card-title">Screenshot Protection</div>
-                <div class="feat-card-text">Technically impossible to capture. Not a warning — actual OS-level protection that renders your content black in any screenshot or screen recording. A first in the industry.</div>
+                <div class="feat-card-text">Your content comes out black in any screenshot or screen recording. Not a policy, actual code that runs at the OS level every time. Nobody else does this.</div>
             </div>
             <div class="feat-card">
                 <div class="feat-card-icon">👁️</div>
                 <div class="feat-card-title">Anonymous by Design</div>
-                <div class="feat-card-text">Browse, like, tip, and subscribe without revealing who you are. For creators, your identity is yours to reveal — or not. Privacy isn't a feature here. It's the foundation.</div>
+                <div class="feat-card-text">Browse, like, tip and subscribe with no one knowing it was you. Creators keep that same option. Your identity is yours to share whenever, if ever.</div>
             </div>
             <div class="feat-card">
                 <div class="feat-card-icon">✦</div>
-                <div class="feat-card-title">Elite Aesthetic Standard</div>
-                <div class="feat-card-text">No nudity. No low-effort content. Sway is built on the principle that desire is most powerful when it's implied — not shown. Think editorial fashion, not explicit content.</div>
+                <div class="feat-card-title">Aesthetic Standard</div>
+                <div class="feat-card-text">Nothing explicit on Sway. Nothing half-hearted either. The idea is that desire is more powerful before it's fully shown. Editorial, not explicit.</div>
             </div>
         </div>
 
@@ -993,22 +1054,52 @@
         <div class="showcase-header">
             <p class="section-tag">The Aesthetic</p>
             <h2 class="showcase-title">What moves people on Sway</h2>
-            <p class="showcase-subtitle">Sensual. Elegant. Intentional. This is what content looks like when the platform actually has a standard.</p>
+            <p class="showcase-subtitle">This is what content looks like when a platform has an actual standard. Sensual and intentional, the kind of thing worth paying for.</p>
         </div>
 
         <div class="showcase-grid" id="showcase-grid">
-            <!-- Photos will be added here — placeholders for now -->
-            <div class="showcase-card showcase-placeholder">
-                <div class="showcase-placeholder-icon">🤫</div>
-                <div class="showcase-placeholder-text">Shh / Hush</div>
+            <div class="showcase-card">
+                <img src="kinks/shh-dominant.jpg" alt="Shh" loading="lazy">
+                <div class="showcase-overlay">
+                    <span class="showcase-tag">🤫 Shh</span>
+                </div>
             </div>
-            <div class="showcase-card showcase-placeholder">
-                <div class="showcase-placeholder-icon">⛓️</div>
-                <div class="showcase-placeholder-text">Dominant</div>
+            <div class="showcase-card">
+                <img src="kinks/feet-bedroom.jpg" alt="Feet" loading="lazy">
+                <div class="showcase-overlay">
+                    <span class="showcase-tag">🦶 Feet</span>
+                </div>
             </div>
-            <div class="showcase-card showcase-placeholder">
-                <div class="showcase-placeholder-icon">👠</div>
-                <div class="showcase-placeholder-text">Heels / Feet</div>
+            <div class="showcase-card">
+                <img src="kinks/hands-dominant.jpg" alt="Hands" loading="lazy">
+                <div class="showcase-overlay">
+                    <span class="showcase-tag">🖐 Hands</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── APP PREVIEW ── -->
+    <section class="app-preview-section">
+        <div class="showcase-header">
+            <p class="section-tag">The App</p>
+            <h2 class="showcase-title">See it for yourself</h2>
+            <p class="showcase-subtitle">Already built. Waiting for the right people to fill it.</p>
+        </div>
+        <div class="app-screens">
+            <div class="app-screen side">
+                <img src="screenshots/app-welcome.jpg" alt="Sway welcome screen" loading="lazy">
+                <div class="app-screen-label">Welcome</div>
+            </div>
+            <div class="app-screen center">
+                <img src="screenshots/app-creator-dashboard.jpg" alt="Creator Dashboard" loading="lazy">
+                <div class="app-screen-label">Creator Dashboard</div>
+            </div>
+            <div class="app-screen side">
+                <img src="screenshots/app-red-room.jpg" alt="Red Room" loading="lazy">
+                <div class="app-screen-label">Red Room</div>
             </div>
         </div>
     </section>
@@ -1021,7 +1112,7 @@
         <div class="form-label-top">
             <p class="section-tag">Early Access</p>
             <h2 class="form-title">Secure your spot</h2>
-            <p class="form-subtitle">First 100 members get founding benefits — lower fees, exclusive badge, priority access.</p>
+            <p class="form-subtitle">The first 100 members get lower fees, an exclusive Founder badge nobody else will ever have, and first access at launch.</p>
         </div>
 
         <div class="form-card">
@@ -1030,7 +1121,7 @@
             <div class="success-card" id="success-card">
                 <div class="success-icon">🖤</div>
                 <h3 class="success-title">You're on the list.</h3>
-                <p class="success-text">We'll reach out as soon as Sway is ready. You're joining something rare — thank you for being early.</p>
+                <p class="success-text">We'll reach out as soon as Sway is ready. You're joining something rare. Thank you for being early.</p>
                 <span class="success-tag">Founding member status secured</span>
             </div>
 
@@ -1188,7 +1279,7 @@
                 </button>
 
                 <p class="form-fine-print">
-                    18+ only. We'll never share your info. No spam — just your launch invite.
+                    18 and older only. Your information stays private. No spam, just your invite when we go live.
                 </p>
 
             </form>
