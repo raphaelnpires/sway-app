@@ -487,44 +487,82 @@
             box-shadow: 0 0 18px rgba(212,175,55,0.2);
         }
 
-        /* ── COUNTER ── */
-        .counter-bar {
+        /* ── SPOTS BATTERY ── */
+        .spots-battery-wrap {
             position: relative;
             z-index: 1;
             text-align: center;
-            padding: 32px 24px;
-            max-width: 400px;
-            margin: 0 auto 0;
+            padding: 40px 24px;
         }
 
-        .counter-label {
-            font-size: 13px;
+        .spots-battery-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             color: var(--muted);
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
 
-        .counter-track {
-            height: 4px;
-            background: var(--card2);
-            border-radius: 100px;
+        .battery-shell {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .battery-body {
+            width: 180px;
+            height: 32px;
+            border: 2px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 4px;
+            background: rgba(255,255,255,0.03);
+            position: relative;
             overflow: hidden;
-            margin-bottom: 10px;
         }
 
-        .counter-fill {
+        .battery-cells {
+            display: flex;
+            gap: 3px;
             height: 100%;
-            background: linear-gradient(90deg, var(--coral), var(--hot-pink));
-            border-radius: 100px;
-            width: 0%;
-            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .counter-numbers {
-            font-size: 13px;
-            color: var(--muted);
+        .battery-cell {
+            flex: 1;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.06);
+            transition: background 0.4s ease;
         }
 
-        .counter-numbers span { color: var(--coral); font-weight: 600; }
+        .battery-cell.filled {
+            background: linear-gradient(135deg, var(--coral), var(--hot-pink));
+            box-shadow: 0 0 6px rgba(255,107,107,0.4);
+        }
+
+        .battery-cell.filled.last {
+            animation: pulse-cell 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-cell {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .battery-cap {
+            width: 5px;
+            height: 14px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 0 3px 3px 0;
+        }
+
+        .spots-battery-hint {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--coral);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            opacity: 0.85;
+        }
 
         /* ── FOOTER ── */
         footer {
@@ -975,13 +1013,16 @@
         </div>
     </div>
 
-    <!-- ── COUNTER ── -->
-    <div class="counter-bar" id="counter-bar">
-        <p class="counter-label">Founding creators & members</p>
-        <div class="counter-track">
-            <div class="counter-fill" id="counter-fill"></div>
+    <!-- ── SPOTS BATTERY ── -->
+    <div class="spots-battery-wrap">
+        <p class="spots-battery-label">Founding spots</p>
+        <div class="battery-shell">
+            <div class="battery-body">
+                <div class="battery-cells" id="battery-cells"></div>
+            </div>
+            <div class="battery-cap"></div>
         </div>
-        <p class="counter-numbers"><span id="counter-num">0</span> / 100 spots claimed</p>
+        <p class="spots-battery-hint">Going fast — limited to 100</p>
     </div>
 
     <div class="section-divider"></div>
@@ -1349,47 +1390,29 @@
         });
 
         // ── COUNTER ANIMATION ──
-        // ── LIVE COUNTER ──
-        const GOAL = 100;
+        // ── SPOTS BATTERY ──
+        // Visually fixed at 65% to create urgency. No real counter needed.
+        const TOTAL_CELLS = 20;
+        const FILLED_CELLS = 13; // 65%
 
-        function setCounter(value) {
-            const bar = document.getElementById('counter-bar');
-            const fill = document.getElementById('counter-fill');
-            const num = document.getElementById('counter-num');
-            if (!bar) return;
-            bar.style.display = '';
-            const pct = Math.min((value / GOAL) * 100, 100);
-            fill.style.width = pct + '%';
-            if (value === 0) { num.textContent = 0; return; }
-            let count = 0;
-            const interval = setInterval(() => {
-                count++;
-                num.textContent = count;
-                if (count >= value) clearInterval(interval);
-            }, 40);
-        }
-
-        async function fetchCount() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/swaytheapp/signups');
-                if (!res.ok) throw new Error();
-                const json = await res.json();
-                setCounter(json.count || 0);
-            } catch {
-                setCounter(0);
+        function buildBattery() {
+            const container = document.getElementById('battery-cells');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let i = 0; i < TOTAL_CELLS; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'battery-cell';
+                if (i < FILLED_CELLS) {
+                    cell.classList.add('filled');
+                    if (i === FILLED_CELLS - 1) cell.classList.add('last');
+                }
+                container.appendChild(cell);
             }
         }
 
-        async function incrementCount() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/swaytheapp/signups/up');
-                if (!res.ok) throw new Error();
-                const json = await res.json();
-                setCounter(json.count || 0);
-            } catch { /* silently fail, counter stays as is */ }
-        }
-
-        window.addEventListener('load', fetchCount);
+        window.addEventListener('load', () => {
+            buildBattery();
+        });
 
         // ── FORM ERROR HELPER ──
         function showFormError(msg) {
@@ -1460,7 +1483,6 @@
                 if (json.success) {
                     form.style.display = 'none';
                     successCard.style.display = 'block';
-                    incrementCount();
                 } else {
                     const msg = json.message || '';
                     if (msg.toLowerCase().includes('email') || msg.toLowerCase().includes('invalid')) {
