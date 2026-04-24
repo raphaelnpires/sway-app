@@ -705,9 +705,9 @@
 
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            max-width: 1200px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -899,7 +899,7 @@
         @media (max-width: 768px) {
             .diff-grid { grid-template-columns: 1fr; }
             .feature-cards { grid-template-columns: 1fr 1fr; }
-            .showcase-grid { grid-template-columns: 1fr 1fr; }
+            .showcase-grid { grid-template-columns: repeat(3, 1fr); }
             .app-screen.side { width: 180px; }
         }
 
@@ -909,7 +909,7 @@
             .features { gap: 0; }
             .feature-item { padding: 16px 16px; min-width: 120px; }
             .feature-cards { grid-template-columns: 1fr; }
-            .showcase-grid { grid-template-columns: 1fr; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
             .about-section { padding: 60px 16px; }
         }
 
@@ -1083,7 +1083,20 @@
                     <span class="showcase-tag">🙏 Worship</span>
                 </div>
             </div>
+            <div class="showcase-card">
+                <img src="kinks/shh-dominant.png" alt="Dominant" loading="lazy">
+                <div class="showcase-overlay">
+                    <span class="showcase-tag">⛓️ Dominant</span>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- ── CREATOR ANYWHERE ── -->
+    <section style="position:relative;z-index:1;padding:72px 24px;text-align:center;max-width:760px;margin:0 auto;">
+        <p class="section-tag">Who can create</p>
+        <h2 style="font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.2;margin-bottom:20px;">Your bedroom is a studio.<br><span style="background:linear-gradient(135deg,#FF6B6B,#F25A8D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Anywhere is enough.</span></h2>
+        <p style="font-size:17px;color:#888899;line-height:1.7;max-width:580px;margin:0 auto;">No studio. No professional equipment. Just a phone and something worth sharing. Sway is built for people who create on their own terms — at home, on their schedule, in their own space. The only standard we hold is elegance. No nudity, no lazy posts. We believe desire is more powerful when it isn't fully shown.</p>
     </section>
 
     <div class="section-divider"></div>
@@ -1127,8 +1140,10 @@
             <!-- SUCCESS STATE -->
             <div class="success-card" id="success-card">
                 <div class="success-icon">🖤</div>
-                <h3 class="success-title">You're on the list.</h3>
-                <p class="success-text">We'll reach out as soon as Sway is ready. You're joining something rare. Thank you for being early.</p>
+                <h3 class="success-title">You're confirmed.</h3>
+                <p class="success-text">You're on the list. Benefits will be announced as soon as the beta launches officially. Follow us for updates:</p>
+                <a href="https://x.com/Swaytheapp" target="_blank" rel="noopener" style="display:inline-block;margin:16px 0;padding:10px 24px;background:rgba(255,107,107,0.12);border:1px solid rgba(255,107,107,0.35);border-radius:100px;color:#FF6B6B;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:0.3px;">𝕏 @Swaytheapp</a>
+                <br>
                 <span class="success-tag">Founding member status secured</span>
             </div>
 
@@ -1363,6 +1378,18 @@
             }, 400);
         });
 
+        // ── FORM ERROR HELPER ──
+        function showFormError(msg) {
+            let el = document.getElementById('form-error-msg');
+            if (!el) {
+                el = document.createElement('p');
+                el.id = 'form-error-msg';
+                el.style.cssText = 'color:#FF6B6B;font-size:13px;text-align:center;margin-top:12px;font-weight:500;';
+                document.getElementById('submit-btn').after(el);
+            }
+            el.textContent = msg;
+        }
+
         // ── FORM SUBMIT ──
         const form = document.getElementById('waitlist-form');
         const successCard = document.getElementById('success-card');
@@ -1395,8 +1422,19 @@
             data.append('platforms', platforms || 'None selected');
             data.append('handle', formData.get('handle') || 'Not provided');
             data.append('portfolio_link', formData.get('portfolio_link') || 'Not provided');
-            if (uploadedFiles.length > 0) {
-                data.append('sample_photos', `${uploadedFiles.length} photo(s) uploaded: ${uploadedFiles.map(f => f.name).join(', ')}`);
+            // Attach actual photo files so they arrive in the email
+            uploadedFiles.forEach((file, i) => {
+                data.append(`photo_${i + 1}`, file, file.name);
+            });
+
+            // Basic email format check before sending
+            const emailVal = formData.get('email');
+            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+            if (!emailOk) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Secure My Spot 🖤';
+                showFormError('Please enter a valid email address.');
+                return;
             }
 
             try {
@@ -1410,12 +1448,19 @@
                     form.style.display = 'none';
                     successCard.style.display = 'block';
                 } else {
-                    throw new Error('Submission failed');
+                    const msg = json.message || '';
+                    if (msg.toLowerCase().includes('email') || msg.toLowerCase().includes('invalid')) {
+                        showFormError('This email address doesn\'t look valid. Double-check it and try again.');
+                    } else {
+                        showFormError('Something went wrong. Please try again.');
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Secure My Spot 🖤';
                 }
             } catch (err) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Secure My Spot 🖤';
-                alert('Something went wrong. Please try again.');
+                showFormError('No connection. Check your internet and try again.');
             }
         });
     </script>
