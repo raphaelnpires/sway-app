@@ -741,20 +741,24 @@
         }
 
         .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            display: flex;
+            justify-content: center;
             gap: 14px;
             max-width: 1300px;
             margin: 0 auto;
+            flex-wrap: wrap;
         }
 
         .showcase-card {
             position: relative;
             border-radius: 20px;
             overflow: hidden;
+            width: 220px;
+            flex-shrink: 0;
             aspect-ratio: 3/4;
             background: var(--card2);
             border: 1px solid var(--border);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
         }
 
         .showcase-card img {
@@ -1136,31 +1140,31 @@
 
         <div class="showcase-grid" id="showcase-grid">
             <div class="showcase-card">
-                <img src="kinks/shh-hush.png" alt="Shh / Hush" loading="lazy">
+                <img src="kinks/shh-hush.jpg" alt="Shh / Hush" loading="lazy">
                 <div class="showcase-overlay">
                     <span class="showcase-tag">🤫 Shh / Hush</span>
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/nails.png" alt="Nails" loading="lazy">
+                <img src="kinks/nails.jpg" alt="Nails" loading="lazy">
                 <div class="showcase-overlay">
                     <span class="showcase-tag">💅 Nails</span>
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/feet.png" alt="Feet" loading="lazy">
+                <img src="kinks/feet.jpg" alt="Feet" loading="lazy">
                 <div class="showcase-overlay">
                     <span class="showcase-tag">🦶 Feet</span>
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/worship.png" alt="Worship" loading="lazy">
+                <img src="kinks/worship.jpg" alt="Worship" loading="lazy">
                 <div class="showcase-overlay">
                     <span class="showcase-tag">🙏 Worship</span>
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="kinks/shh-dominant.png" alt="Shh / Hush" loading="lazy">
+                <img src="kinks/shh-dominant.jpg" alt="Shh / Hush" loading="lazy">
                 <div class="showcase-overlay">
                     <span class="showcase-tag">🤫 Shh / Hush</span>
                 </div>
