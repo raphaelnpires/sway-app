@@ -59,16 +59,13 @@
 
         /* ── NAV ── */
         .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            position: relative;
+            z-index: 1;
             padding: 18px 36px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            background: linear-gradient(to right, rgba(14,14,16,0.97) 280px, transparent 420px);
+            background: transparent;
         }
 
         .nav-logo {
@@ -91,7 +88,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 120px 24px 60px;
+            padding: 20px 24px 60px;
             text-align: center;
         }
 
@@ -867,8 +864,16 @@
         }
 
         @media (max-width: 600px) {
-            .app-screen.side { display: none; }
-            .app-screen.center { width: 240px; }
+            .app-screens {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
+                padding-bottom: 16px;
+                gap: 14px;
+            }
+            .app-screen.side { display: block; width: 160px; flex-shrink: 0; }
+            .app-screen.center { width: 160px; flex-shrink: 0; }
         }
 
         /* ── PHOTO UPLOAD ── */
@@ -944,13 +949,40 @@
         }
 
         @media (max-width: 600px) {
+            .nav-logo { height: 80px; }
             .form-card { padding: 28px 20px; }
             .kink-grid { grid-template-columns: repeat(2, 1fr); }
             .features { gap: 0; }
             .feature-item { padding: 16px 16px; min-width: 120px; }
             .feature-cards { grid-template-columns: 1fr; }
-            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
             .about-section { padding: 60px 16px; }
+
+            /* kink showcase — horizontal scroll */
+            .showcase-grid {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                gap: 10px;
+                padding-bottom: 12px;
+                max-width: 100%;
+            }
+            .showcase-card {
+                min-width: 150px;
+                flex-shrink: 0;
+            }
+
+            /* app screenshots — horizontal scroll */
+            .app-screens {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
+                padding-bottom: 16px;
+                gap: 14px;
+            }
+            .app-screen.side { display: block; width: 155px; flex-shrink: 0; }
+            .app-screen.center { width: 155px; flex-shrink: 0; }
         }
 
         @media (max-width: 380px) {
@@ -1271,6 +1303,15 @@
 
                         <input class="kink-option" type="checkbox" name="kinks" id="k-whisper" value="Whisper">
                         <label class="kink-label" for="k-whisper">🎙️ Whisper</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-headscissor" value="Headscissor">
+                        <label class="kink-label" for="k-headscissor">✂️ Headscissor</label>
+
+                        <input class="kink-option" type="checkbox" name="kinks" id="k-other" value="Other">
+                        <label class="kink-label" for="k-other" style="grid-column: span 3;">✏️ Other — suggest your own</label>
+                    </div>
+                    <div id="kink-other-wrap" style="display:none; margin-top:10px;">
+                        <input type="text" name="kink_other" id="kink-other-input" placeholder="What else moves you?" style="width:100%;padding:11px 14px;border-radius:10px;border:1px solid rgba(255,107,107,0.35);background:var(--card2);color:var(--text);font-family:inherit;font-size:14px;outline:none;">
                     </div>
                 </div>
 
@@ -1412,6 +1453,15 @@
 
         window.addEventListener('load', () => {
             buildBattery();
+
+            // "Other" kink toggle
+            const kOther = document.getElementById('k-other');
+            const kOtherWrap = document.getElementById('kink-other-wrap');
+            if (kOther && kOtherWrap) {
+                kOther.addEventListener('change', () => {
+                    kOtherWrap.style.display = kOther.checked ? 'block' : 'none';
+                });
+            }
         });
 
         // ── FORM ERROR HELPER ──
